@@ -1,0 +1,33 @@
+name: Test Versioning
+on:
+  push:
+    branches: [main]
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  activate:
+    runs-on: ubuntu-latest
+  
+  build:
+    needs: activate
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Get next version
+      uses: reecetech/version-increment@2024.10.1
+      id: version
+      with:
+        scheme: calver
+
+    - name: Check version
+      run: |
+        echo "version=${{ steps.version.outputs.version }}"
+        echo "datetime=$(date +'%Y-%m-%dT%H:%M:%S')""
+    
