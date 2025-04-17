@@ -19,9 +19,12 @@ jobs:
       with:
         use_api: true
         scheme: calver
+        tag_prefix: Release_
 
     - name: Check version
       run: |
         echo "version=${{ steps.version.outputs.version }}"
+        echo "v-version=${{ steps.version.outputs.v-version }}"
+        echo "prefixed-v-version=${{ steps.version.outputs.prefixed-v-version }}"
         echo "datetime=$(date +'%Y-%m-%dT%H:%M:%S')"
     
