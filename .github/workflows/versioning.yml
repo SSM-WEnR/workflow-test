@@ -12,6 +12,8 @@ permissions:
 jobs:
   activate:
     runs-on: ubuntu-latest
+    steps:
+    - run: echo ok go
   
   build:
     needs: activate
