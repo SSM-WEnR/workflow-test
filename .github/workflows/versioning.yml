@@ -9,27 +9,19 @@ on:
 permissions:
   contents: read
 
-jobs:
-  activate:
-    runs-on: ubuntu-latest
-    steps:
-    - run: echo ok go
-  
+jobs: 
   build:
-    needs: activate
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-
     - name: Get next version
       uses: reecetech/version-increment@2024.10.1
       id: version
       with:
+        use_api: true
         scheme: calver
 
     - name: Check version
       run: |
         echo "version=${{ steps.version.outputs.version }}"
-        echo "datetime=$(date +'%Y-%m-%dT%H:%M:%S')""
+        echo "datetime=$(date +'%Y-%m-%dT%H:%M:%S')"
     
