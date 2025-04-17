@@ -26,6 +26,6 @@ jobs:
         echo "version=${{ steps.version.outputs.version }}"
         echo "v-version=${{ steps.version.outputs.v-version }}"
         echo "prefixed-v-version=${{ steps.version.outputs.prefixed-v-version }}"
-        echo "datetime=$(date +'%Y-%m-%dT%H:%M:%S')"
+        echo "datetime=$(date +'%Y-%m-%dT%H:%M:%S%z')"
         echo "Commit message: ${{ github.event.head_commit.message }}"
     
