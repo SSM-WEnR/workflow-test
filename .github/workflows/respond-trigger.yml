@@ -32,11 +32,11 @@ jobs:
         echo "datetime=$(date +'%Y-%m-%dT%H:%M:%S%z')" >> $GITHUB_ENV
 
         if [[ '${{ github.event_name }}' == 'workflow_dispatch' ]]; then
-          echo "Triggered from ${{github.event.inputs.source_repo}} by ${{github.event.inputs.source_owner}}." >> $trigger_msg
-          echo "${{github.event.input.message}}" >> $commit_msg
+          echo "trigger_msg=Triggered from ${{github.event.inputs.source_repo}} by ${{github.event.inputs.source_owner}}." >> $GITHUB_OUTPUT
+          echo "commit_msg=${{github.event.input.message}}" >> $GITHUB_OUTPUT
         else
-          echo "Triggered by ${{github.event_name}} event." >> $trigger_msg
-          echo "${{github.event.head_commit.message}}" >> $commit_msg
+          echo "trigger_msg=Triggered by ${{github.event_name}} event." >> $GITHUB_OUTPUT
+          echo "commit_msg=${{github.event.head_commit.message}}" >> $GITHUB_OUTPUT
         fi
     
     - name: Get next version
