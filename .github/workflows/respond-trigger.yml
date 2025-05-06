@@ -39,12 +39,6 @@ jobs:
           echo "commit_msg=${{github.event.head_commit.message}}" >> $GITHUB_OUTPUT
         fi
     
-    - name: Get next version
-      uses: reecetech/version-increment@2024.10.1
-      id: version
-      with:
-        scheme: calver
-    
     - name: Generate GitHub App installation access token (IAT)
       id: generate_iat
       uses: actions/create-github-app-token@v1
@@ -55,6 +49,14 @@ jobs:
     
     - name: Set the token as environment variable
       run: echo "GIT_CREDENTIALS=https://x-access-token:${{ steps.generate_iat.outputs.token }}@github.com" >> "$GITHUB_ENV"
+
+    - name: Get next version
+      uses: reecetech/version-increment@2024.10.1
+      id: version
+      with:
+        use_api: true
+        scheme: calver
+        tag_prefix: Release_
     
     - name: Checkout
       uses: actions/checkout@v4
