@@ -26,6 +26,10 @@ jobs:
         owner: ${{ github.repository_owner }}
     - name: Set the token as environment variable
       run: echo "GIT_CREDENTIALS=https://x-access-token:${{ steps.generate_iat.outputs.token }}@github.com" >> "$GITHUB_ENV"
-    - name: Check version
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        repository: 'SSM-WEnR/workflow-private'
+    - name: Output
       run: |
-        echo "Successfully triggered by ${{github.event.inputs.source_owner}}."
+        echo "Successfully triggered from ${{github.event.inputs.source_repo}} by ${{github.event.inputs.source_owner}}."
