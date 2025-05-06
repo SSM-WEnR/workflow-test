@@ -9,8 +9,8 @@ on:
         description: 'Source repo owner'
         required: true
         type: string
-      message:
-        description: 'Commit message'
+      source_message:
+        description: 'Source message'
         required: true
         type: string
 
@@ -33,7 +33,7 @@ jobs:
 
         if [[ '${{ github.event_name }}' == 'workflow_dispatch' ]]; then
           echo "trigger_msg=Triggered from ${{github.event.inputs.source_repo}} by ${{github.event.inputs.source_owner}}." >> $GITHUB_OUTPUT
-          echo "commit_msg=${{github.event.input.message}}" >> $GITHUB_OUTPUT
+          echo "commit_msg=${{github.event.inputs.source_message}}" >> $GITHUB_OUTPUT
         else
           echo "trigger_msg=Triggered by ${{github.event_name}} event." >> $GITHUB_OUTPUT
           echo "commit_msg=${{github.event.head_commit.message}}" >> $GITHUB_OUTPUT
