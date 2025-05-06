@@ -1,0 +1,23 @@
+on:
+  workflow_dispatch:
+    inputs:
+      source_repo:
+        description: 'Source repo'
+        required: true
+        type: string
+      source_owner:
+        description: 'Source repo owner'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Check version
+      run: |
+        echo "Successfully triggered by ${{context.payload.inputs.source_owner}}."
