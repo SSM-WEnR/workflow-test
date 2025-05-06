@@ -28,4 +28,4 @@ jobs:
       run: echo "GIT_CREDENTIALS=https://x-access-token:${{ steps.generate_iat.outputs.token }}@github.com" >> "$GITHUB_ENV"
     - name: Check version
       run: |
-        echo "Successfully triggered by ${{context.payload.inputs.source_owner}}."
+        echo "Successfully triggered by ${{github.event.inputs.source_owner}}."
