@@ -31,6 +31,7 @@ jobs:
       with:
         repository: 'SSM-WEnR/workflow-private'
         ref: 'main'
+        token: steps.generate_iat.outputs.token
     - name: Output
       run: |
         echo "Successfully triggered from ${{github.event.inputs.source_repo}} by ${{github.event.inputs.source_owner}}."
