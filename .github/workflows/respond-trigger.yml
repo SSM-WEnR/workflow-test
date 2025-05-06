@@ -30,6 +30,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: 'SSM-WEnR/workflow-private'
+        ref: 'main'
     - name: Output
       run: |
         echo "Successfully triggered from ${{github.event.inputs.source_repo}} by ${{github.event.inputs.source_owner}}."
