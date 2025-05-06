@@ -17,7 +17,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    
+    - name: Generate GitHub App installation access token (IAT)
+      id: generate_iat
+      uses: actions/create-github-app-token@v1
+      with:
+        app-id: ${{ secrets.DOCS_APP_ID }}
+        private-key: ${{ secrets.DOCS_APP_PRIVATE_KEY }}
+        owner: ${{ github.repository_owner }}
+    - name: Set the token as environment variable
+      run: echo "GIT_CREDENTIALS=https://x-access-token:${{ steps.generate_iat.outputs.token }}@github.com" >> "$GITHUB_ENV"
     - name: Check version
       run: |
         echo "Successfully triggered by ${{context.payload.inputs.source_owner}}."
