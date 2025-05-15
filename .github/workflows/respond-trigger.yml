@@ -45,7 +45,7 @@ jobs:
     - name: Create new release
       uses: softprops/action-gh-release@v2
       env:
-        GITHUB_TOKEN: ${{ github.token }}
+        GITHUB_TOKEN: ${{ steps.generate_iat.outputs.token }}
       with:
         draft: false
         prerelease: false
