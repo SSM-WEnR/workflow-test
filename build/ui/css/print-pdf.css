@@ -1,0 +1,81 @@
+@page {
+  font-family: var(--text-font-family), serif;
+  font-size: var(--body-font-size--print);
+  border-bottom: 2px var(--color-wur-primary-2) solid;
+
+  @top-right {
+    content: string(chapter-title);
+    font-style: italic;
+    vertical-align: bottom;
+  }
+
+  @bottom-left {
+    content: string(doc-name);
+    vertical-align: top;
+    margin-top: 0.5em;
+  }
+
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    vertical-align: top;
+    margin-top: 0.5em;
+  }
+}
+
+@page:first-of-group {
+  @top-right {
+    content: normal;
+  }
+}
+
+@media print {
+  .doc {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .doc #preamble #cover-image {
+    margin-left: -4.5em;
+    margin-top: 7.5em;
+    margin-bottom: 2.25em;
+  }
+
+  .doc #preamble #cover-image img {
+    max-width: 108%;
+  }
+
+  .doc #preamble #wur-logo {
+    margin: 0;
+  }
+
+  .doc #toctitle {
+    margin-top: 0 !important;
+  }
+
+  .doc h1.sect0 {
+    margin-top: -0.5em !important;
+  }
+
+  div#toc ul.sectlevel0 {
+    font-family: var(--text-font-family), serif;
+    line-height: 1.8;
+    padding-left: 0;
+  }
+
+  div#toc ul li::marker {
+    content: "";
+  }
+
+  div#toc a::after {
+    content: leader(".") target-counter(attr(href), page);
+  }
+}
+
+h1.sect0 {
+  string-set: chapter-title content();
+  -prince-page-group: start;
+}
+
+span#footer-doc-name {
+  string-set: doc-name content();
+}
